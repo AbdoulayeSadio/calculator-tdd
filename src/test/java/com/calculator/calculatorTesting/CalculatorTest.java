@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 
-
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.time.Duration;
 import java.time.Instant;
@@ -68,8 +68,12 @@ public class CalculatorTest {
         double b = 3.4;
         //Act
         double somme = calculatorUnderTest.add(a, b);
-        //Assert
+        DecimalFormat df = new DecimalFormat("0.0");
+        String str = df.format(somme);
+        double mSomme = Double.parseDouble(str.replace(',', '.'));
 
+        //Assert
+        assertThat(mSomme).isEqualTo(5.7);
     }
 
     @Test
